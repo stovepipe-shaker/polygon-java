@@ -1,22 +1,19 @@
-import core.Constants;
-import core.enumerations.EnDirections;
-import core.enumerations.EnScopes;
-import core.operations.ObjectOperations;
+import core.conventors.JsonConvertor;
+import core.conventors.MapConvertor;
+import core.conventors.XmlConvertor;
+
+import java.util.HashMap;
 
 public class Main {
 
-    public Integer x = null;
-    private String y = null;
-    public Boolean z = null;
+    public Integer x = 0;
+    private String y = "0";
+    public Boolean z = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        System.out.println(ObjectOperations.flattenObject(
-            EnDirections.D000,
-            EnScopes.BRACES,
-            "\"%s\":%s",
-            ",\n",
-            "\t",
-            2));
+        HashMap<String, Object> hm = MapConvertor.convertFromObject(new Main());
+        System.out.println(JsonConvertor.convertFromMap(hm, true));
+        System.out.println(XmlConvertor.convertFromMap(hm, "root", false));
     }
 }

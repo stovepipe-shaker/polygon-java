@@ -32,7 +32,7 @@ public class StringOperations {
         return joinedStrings.toString();
     }
 
-    public static List<String> splitString(String string, String splitter) {
+    public static ArrayList<String> splitString(String string, String splitter) {
         ArrayList<String> splittedStrings = new ArrayList<>();
         int startIndex = 0;
         int endIndex = string.indexOf(splitter);
