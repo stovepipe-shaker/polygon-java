@@ -1,23 +1,20 @@
+import core.connectors.SqlConnector;
 import core.conventors.JsonConvertor;
 import core.conventors.MapConvertor;
 import core.conventors.XmlConvertor;
-import core.structures.Pair;
+import core.enumerations.EnSqlType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Main {
 
-    public Pair<Integer, String> pair = new Pair(1, "hi");
-    public Integer x = 0;
-    private String y = "0";
-    public Boolean z = false;
-
-    public static void main(String[] args) throws Exception {
-
-        HashMap<String, Object> hm = MapConvertor.convertFromObject(new Main());
-        HashMap<String, Object> xmlHm = new HashMap<>();
-        xmlHm.put("root", hm);
-        System.out.println(JsonConvertor.convertFromMap(hm, true));
-        System.out.println(XmlConvertor.convertFromMap(XmlConvertor.addRootToMap(hm, "root"), true));
+       public static void main(String[] args) throws Exception {
+        SqlConnector connector = new SqlConnector();
+        connector.connect(EnSqlType.MSSQL, "10.10.10.10", SqlConnector.DEFAULT_SQL_PORT, "database", "admin", "admin");
+        ArrayList<HashMap<String, Object>> erz_system_config = connector.readRows("table", "id = 1");
+        System.out.println(JsonConvertor.convertFromMap(MapConvertor.wrapWithMap(erz_system_config, "root"), true));
+        System.out.println(XmlConvertor.convertFromMap(MapConvertor.wrapWithMap(MapConvertor.wrapWithMap(erz_system_config, "arr"), "root"), true));
+        connector.disconnect();
     }
 }

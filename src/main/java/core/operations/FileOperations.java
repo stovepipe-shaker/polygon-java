@@ -2,7 +2,6 @@ package core.operations;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class FileOperations {
