@@ -44,4 +44,17 @@ public class StringOperations {
         splittedStrings.add(string.substring(startIndex));
         return splittedStrings;
     }
+
+    public static String replaceAllMatchesOfString(String string, String sourceText, String targetText) {
+        ArrayList<Integer> indeces = new ArrayList<Integer>();
+        int index = -1;
+        while ((index = string.indexOf(sourceText, index + 1)) != -1) {
+            indeces.add(index);
+        }
+        StringBuilder stringBuilder = new StringBuilder(string);
+        for (int i = 0; i < indeces.size(); ++i) {
+            stringBuilder = stringBuilder.replace(indeces.get(i), indeces.get(i) + sourceText.length(), targetText);
+        }
+        return stringBuilder.toString();
+    }
 }
