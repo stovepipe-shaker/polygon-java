@@ -14,8 +14,7 @@ public class JsonConvertor {
     private static final Gson oneRowGson = new GsonBuilder().create();
 
     public static String convertFromObject(Object object, Boolean usePrettyFormat) {
-        Gson gson = usePrettyFormat ? prettyGson : oneRowGson;
-        return gson.toJson(object, object.getClass());
+        return (usePrettyFormat ? prettyGson : oneRowGson).toJson(object, object.getClass());
     }
 
     public static String convertFromMap(Map<String, Object> map, Boolean usePrettyFormat) {
